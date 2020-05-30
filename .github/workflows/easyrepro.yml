@@ -23,5 +23,9 @@ jobs:
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v1
       
+    - name: build-test-assembly
+      working-directory: ${{ env.msbuildtarget }}
+      run: msbuild /restore /t:rebuild
+      
     - name: Run a one-line script
-      run:  '& "$(vswhere -property installationPath)\Common7\IDE\MSTest.exe" /help'
+      run:  '& "$(vswhere -property installationPath)\Common7\IDE\VSTest.Console.exe" /help'
