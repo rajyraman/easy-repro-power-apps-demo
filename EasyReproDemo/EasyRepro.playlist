@@ -1,0 +1,4 @@
+<Playlist Version="1.0">
+  <Add Test="EasyReproDemo.CustomerServiceHubTests.Open_Account_Grid" />
+  <Add Test="EasyReproDemo.CustomerServiceHubTests.Check_If_Show_Chart_Button_Exists" />
+</Playlist>
