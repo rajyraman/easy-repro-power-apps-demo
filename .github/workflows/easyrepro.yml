@@ -24,7 +24,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1
       
     - name: build-test-assembly
-      working-directory: ${{ env.msbuildtarget }}
+      working-directory: EasyReproDemo
       run: msbuild /restore /t:rebuild
       
     - name: Run a one-line script
