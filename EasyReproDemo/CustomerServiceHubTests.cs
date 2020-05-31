@@ -14,10 +14,10 @@ namespace EasyReproDemo
         [ClassInitialize]
         public static void Initialize(TestContext testContext)
         {
-            var username = testContext.Properties["username"].ToString().ToSecureString();
-            var password = testContext.Properties["password"].ToString().ToSecureString();
-            var appUrl = new Uri(testContext.Properties["appurl"].ToString());
-            var mfa = testContext.Properties["mfaToken"].ToString().ToSecureString();
+            var username = Environment.GetEnvironmentVariable("username")?.ToSecureString() ?? testContext.Properties["username"].ToString().ToSecureString();
+            var password = Environment.GetEnvironmentVariable("password")?.ToSecureString() ?? testContext.Properties["password"].ToString().ToSecureString();
+            var appUrl = new Uri(Environment.GetEnvironmentVariable("appurl")?.ToString() ?? testContext.Properties["appurl"].ToString());
+            var mfa = Environment.GetEnvironmentVariable("mfaToken")?.ToString().ToSecureString() ?? testContext.Properties["mfaToken"].ToString().ToSecureString();
 
             var client = new WebClient(new BrowserOptions
             {
