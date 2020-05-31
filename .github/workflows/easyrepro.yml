@@ -37,7 +37,7 @@ jobs:
       run: msbuild /t:rebuild
       
     - name: Run tests
-      working-directory: EasyReproDemo
+      working-directory: EasyReproDemo\obj\Debug\
       env:
         appurl: 'https://dreamingincrm.crm6.dynamics.com/Apps/uniquename/Customerservicehub'
         username: ${{ secrets.USERNAME }}
