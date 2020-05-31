@@ -37,4 +37,4 @@ jobs:
       run: msbuild /t:rebuild
       
     - name: Run a one-line script
-      run:  '"$(vswhere -latest -products * -requires Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.Web -requiresAny -property installationPath)\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" /help'
+      run:  '& "$(vswhere -latest -products * -requires Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.Web -requiresAny -property installationPath)\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" /help'
