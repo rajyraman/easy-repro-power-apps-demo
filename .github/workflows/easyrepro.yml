@@ -37,4 +37,9 @@ jobs:
       run: msbuild /t:rebuild
       
     - name: Run a one-line script
-      run:  '& "$(vswhere -latest -products * -requires Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.Web -requiresAny -property installationPath)\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" /help'
+      env:
+        appurl: 'https://dreamingincrm.crm6.dynamics.com/Apps/uniquename/Customerservicehub'
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        mfaToken: ${{ secrets.mfaToken }}
+      run:  '& "$(vswhere -latest -products * -requires Microsoft.VisualStudio.Workload.ManagedDesktop Microsoft.VisualStudio.Workload.Web -requiresAny -property installationPath)\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" EasyReproDemo.dll'
