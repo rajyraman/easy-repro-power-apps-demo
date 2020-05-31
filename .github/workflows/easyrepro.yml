@@ -43,4 +43,4 @@ jobs:
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
         mfaToken: ${{ secrets.mfaToken }}
-      run:  '& "$(vswhere -property installationPath)\Common7\IDE\VSTest.Console.exe" EasyReproDemo.dll'
+      run:  '& "$(vswhere -property installationPath)\Common7\IDE\MSTest.exe" EasyReproDemo.dll'
