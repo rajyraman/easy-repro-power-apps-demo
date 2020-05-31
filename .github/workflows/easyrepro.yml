@@ -19,13 +19,22 @@ jobs:
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
+      
+    - name: Setup NuGet.exe
+      uses: nuget/setup-nuget@v1
+      with:
+        nuget-version: ${{ matrix.nuget }}
 
+    - name: Nuget restore
+      working-directory: EasyReproDemo
+      run: nuget restore EasyReproDemo.sln
+      
     - name: setup-msbuild
       uses: microsoft/setup-msbuild@v1
-      
+         
     - name: build-test-assembly
       working-directory: EasyReproDemo
-      run: msbuild /restore /t:rebuild
+      run: msbuild /t:rebuild
       
     - name: Run a one-line script
       run:  '& "$(vswhere -property installationPath)\Common7\IDE\VSTest.Console.exe" /help'
