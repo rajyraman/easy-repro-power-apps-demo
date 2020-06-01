@@ -42,5 +42,5 @@ jobs:
         appurl: 'https://dreamingincrm.crm6.dynamics.com/Apps/uniquename/Customerservicehub'
         username: ${{ secrets.USERNAME }}
         password: ${{ secrets.PASSWORD }}
-        mfaToken: ${{ secrets.mfaToken }}
+        mfaToken: ${{ secrets.MFATOKEN }}
       run:  '& "$(vswhere -latest -products * -property installationPath)\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" EasyReproDemo.dll /logger:console /platform:x64 /framework:.NETFramework,Version=v4.6.2'
