@@ -24,7 +24,7 @@ namespace EasyReproDemo
                 BrowserType = BrowserType.Chrome,
                 PrivateMode = true,
                 UCITestMode = false,
-                Headless = bool.Parse(testContext.Properties["headless"].ToString())
+                Headless = bool.Parse(testContext.Properties["headless"]?.ToString() ?? "true")
             });
             _xrmApp = new XrmApp(client);
             _xrmApp.OnlineLogin.Login(appUrl, username, password, mfa);
