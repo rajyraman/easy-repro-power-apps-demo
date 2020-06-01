@@ -34,7 +34,7 @@ jobs:
          
     - name: build-test-assembly
       working-directory: EasyReproDemo
-      run: msbuild /t:rebuild
+      run: msbuild /t:rebuild /p:Platform=x64
       
     - name: Run tests
       working-directory: EasyReproDemo\bin\x64\Debug\
