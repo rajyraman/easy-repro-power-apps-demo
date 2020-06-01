@@ -4,9 +4,9 @@ name: easyrepro
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,30 +17,30 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-      
-    - name: Setup NuGet.exe
-      uses: nuget/setup-nuget@v1
-      with:
-        nuget-version: ${{ matrix.nuget }}
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
 
-    - name: Nuget restore
-      working-directory: EasyReproDemo
-      run: nuget restore EasyReproDemo.sln
-      
-    - name: setup-msbuild
-      uses: microsoft/setup-msbuild@v1
-         
-    - name: build-test-assembly
-      working-directory: EasyReproDemo
-      run: msbuild /t:rebuild /p:Platform=x64
-      
-    - name: Run tests
-      working-directory: EasyReproDemo\bin\x64\Debug\
-      env:
-        appurl: 'https://dreamingincrm.crm6.dynamics.com/Apps/uniquename/Customerservicehub'
-        username: ${{ secrets.USERNAME }}
-        password: ${{ secrets.PASSWORD }}
-        mfaToken: ${{ secrets.MFATOKEN }}
-      run:  '& "$(vswhere -latest -products * -property installationPath)\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" EasyReproDemo.dll /logger:console /platform:x64 /framework:.NETFramework,Version=v4.6.2'
+      - name: Setup NuGet.exe
+        uses: nuget/setup-nuget@v1
+        with:
+          nuget-version: ${{ matrix.nuget }}
+
+      - name: Nuget restore
+        working-directory: EasyReproDemo
+        run: nuget restore EasyReproDemo.sln
+
+      - name: setup-msbuild
+        uses: microsoft/setup-msbuild@v1
+
+      - name: build-test-assembly
+        working-directory: EasyReproDemo
+        run: msbuild /t:rebuild /p:Platform=x64
+
+      - name: Run tests
+        working-directory: EasyReproDemo\bin\x64\Debug\
+        env:
+          appurl: "https://dreamingincrm.crm6.dynamics.com/Apps/uniquename/Customerservicehub"
+          powerappsusername: ${{ secrets.USERNAME }}
+          powerappspassword: ${{ secrets.PASSWORD }}
+          mfaToken: ${{ secrets.MFATOKEN }}
+        run: '& "$(vswhere -latest -products * -property installationPath)\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" EasyReproDemo.dll /logger:console /platform:x64 /framework:.NETFramework,Version=v4.6.2'
